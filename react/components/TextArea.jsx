@@ -17,7 +17,7 @@ var TextArea = React.createClass({
 
     handleSave:function(){
 
-       this.props.onSave(this.state.noteText,this.props.id);
+       this.props.onSave(this.state.noteText,this.props.id,this.state.fileName);
 
        if(!this.props.id) {
            this.refs.textArea.getDOMNode().value = '';
@@ -26,8 +26,17 @@ var TextArea = React.createClass({
 
     },
 
-    componentWillReceiveProps: function(nextProps) {
+    handleFileChange: function(event) {
+        console.log(event.target.files[0])
+        this.setState({fileName: event.target.files[0]});
+        this.setState({timeImageText: event.target.files[0].lastModifiedDate});
+        var ImageTime = event.target.files[0].lastModifiedDate;
+        console.log("Time Taken: "+ImageTime)
+        console.log("Time Taken2: "+this.state.timeImageText)
 
+    },
+
+    componentWillReceiveProps: function(nextProps) {
         this.setState({
             noteText: nextProps.noteText
         });
@@ -41,6 +50,7 @@ var TextArea = React.createClass({
         return (
             <div>
                 <textarea className="form-control" ref="textArea" cols="100" rows="20" value={this.state.noteText} onChange={this.handleChange}></textarea><br/>
+                 <input type="file" onChange={this.handleFileChange}/>
                 <input type="button" className="btn btn-success btn-lg" value="Save" onClick={this.handleSave}/>
             </div>
         )

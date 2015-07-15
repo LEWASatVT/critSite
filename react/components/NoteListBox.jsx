@@ -17,7 +17,7 @@ var NoteListBox = React.createClass({
             notes: notes
         });
     },
-
+ 
     componentDidMount: function() {
         this.unsubscribe = NoteStore.listen(this.onChange);
     },

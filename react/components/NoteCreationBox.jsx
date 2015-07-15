@@ -9,14 +9,13 @@ var NoteStore = require('../../stores/NoteStore.js');
 
 var NoteCreationBox = React.createClass({
 
-    handleSave:function(noteText,id){
-
+    handleSave:function(noteText,id,fileName){
         if(id){
-            NoteActions.editNote({_id:id,text:noteText});
+            NoteActions.editNote({_id:id,text:noteText,file:fileName});
         }
 
         else{
-            NoteActions.createNote({_id:Date.now(),text:noteText});
+            NoteActions.createNote({_id:Date.now(),text:noteText,file:fileName});
         }
     },
 

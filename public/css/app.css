@@ -11,3 +11,10 @@
     text-align: center;
     border-bottom: 1px solid #ccc;
 }
+textarea.form-control{
+	height: 300px;
+}
+.list-group-item img{
+	height: 100px;
+
+}
