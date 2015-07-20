@@ -22,6 +22,21 @@ var Note = React.createClass({
         NoteActions.deleteNote({_id:id});
     },
 
+    componentDidMount:function() {
+        var component=this;
+        var noteImageEl = this.getDOMNode().querySelector('#thumbnail_'+this.props.note._id);
+         console.log("Image Element: "+noteImageEl)
+        if(this.props.note.file) {
+            console.log("fileName: "+this.props.note.file)
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                console.log("Result Data: "+e.target.result)            
+                noteImageEl.setAttribute('src',e.target.result);
+            }
+            reader.readAsDataURL(this.props.note.file);
+        }
+    },
+
     render: function() {
 
         var note=this.props.note;
