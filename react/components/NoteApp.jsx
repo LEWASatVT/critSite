@@ -5,6 +5,7 @@
 var React = require('react');
 var NoteListBox=require('./NoteListBox.jsx');
 var NoteCreationBox=require('./NoteCreationBox.jsx');
+var NoteActions = require('../../actions/NoteActions.js');
 
 var NoteApp = React.createClass({
 
@@ -18,6 +19,10 @@ var NoteApp = React.createClass({
 
     onAdd:function(){
         this.setState({currentlyEdited:null});
+    },
+
+    componentDidMount:function(){
+        NoteActions.fetchTurbidity();
     },
 
     render: function() {

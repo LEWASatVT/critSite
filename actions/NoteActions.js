@@ -7,7 +7,8 @@ var Reflux=require('reflux');
 var NoteActions = Reflux.createActions([
     "createNote",
     "editNote",
-    "deleteNote"
+    "deleteNote",
+    "fetchTurbidity"
 ]);
 
 module.exports=NoteActions;

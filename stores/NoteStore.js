@@ -3,6 +3,8 @@
  */
 var Reflux=require('reflux');
 var NoteActions=require('../actions/NoteActions');
+var $ = require('jquery');
+var ImageUtil = require('../util/util.js');
 
 var _notes=[];
 
@@ -12,7 +14,8 @@ var NoteStore = Reflux.createStore({
         this.listenTo(NoteActions.createNote, this.onCreate);
         this.listenTo(NoteActions.editNote, this.onEdit);
         this.listenTo(NoteActions.deleteNote, this.onDelete);
-        _notes.push({_id:0,text:"initialNote"});
+        this.listenTo(NoteActions.fetchTurbidity, this.fetchTurbidity);
+
     },
 
     getInitialState: function() {
@@ -42,6 +45,13 @@ var NoteStore = Reflux.createStore({
                 break;
             }
         }
+    },
+
+    fetchTurbidity: function() {
+        $.get("http://192.168.1.10:8080/sites/stroubles1/metrics/25/timeseries?limit=1",null,function(object){
+                _notes.push({_id:0,text:"Turbidy: "+object.data[0][0],dateTime:object.data[0][1]});
+                this.trigger(_notes);
+        }.bind(this));  
     },
 
     getNotes:function(){
