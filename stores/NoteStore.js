@@ -23,8 +23,15 @@ var NoteStore = Reflux.createStore({
     },
 
     onCreate: function(note) {
-        _notes.push(note);
-        this.trigger(_notes);
+        if (note.file) {
+            ImageUtil.extractExifData(note.file, function(tags){
+                    note['dateTime']=tags.ModifyDate;
+                    note['lat']=tags.GPSLatitude;
+                    note['lon']=tags.GPSLongitude;
+                    _notes.push(note);
+                    this.trigger(_notes);  
+                }.bind(this));
+        }
     },
 
     onEdit: function(note) {
