@@ -7,7 +7,6 @@
  */
 var React = require('react');
 var App=require('./App.jsx');
-var $ = require('jquery-browserify');
 
 
 if (typeof window !== 'undefined') {

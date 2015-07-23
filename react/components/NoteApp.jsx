@@ -6,11 +6,12 @@ var React = require('react');
 var NoteListBox=require('./NoteListBox.jsx');
 var NoteCreationBox=require('./NoteCreationBox.jsx');
 var NoteActions = require('../../actions/NoteActions.js');
+var Login = require('./Login.jsx');
 
 var NoteApp = React.createClass({
 
     getInitialState:function(){
-        return {id:null}
+        return {id:null,user:null}
     },
 
     onEdit:function(id){
@@ -25,6 +26,12 @@ var NoteApp = React.createClass({
         NoteActions.fetchTurbidity();
     },
 
+    handleLogin:function(email,password){
+        console.log('email: '+email)
+        console.log('password: '+password)
+
+    },
+
     render: function() {
         return (
             <div className="container">
@@ -36,7 +43,8 @@ var NoteApp = React.createClass({
                 <div className="row">
                     <NoteListBox onEdit={this.onEdit} onAdd={this.onAdd}/>
                     <NoteCreationBox id={this.state.currentlyEdited} />
-                </div>
+                </div> 
+                    <Login handleLogin={this.handleLogin}/>
             </div>
         )
     }
