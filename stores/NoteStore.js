@@ -23,6 +23,7 @@ var NoteStore = Reflux.createStore({
     },
 
     onCreate: function(note) {
+        note.sync = false;
         if (note.file) {
             ImageUtil.extractExifData(note.file, function(tags){
                     note['dateTime']=tags.ModifyDate;
@@ -31,6 +32,9 @@ var NoteStore = Reflux.createStore({
                     _notes.push(note);
                     this.trigger(_notes);  
                 }.bind(this));
+        } else {
+            _notes.push(note);
+            this.trigger(_notes);
         }
     },
 
@@ -56,8 +60,7 @@ var NoteStore = Reflux.createStore({
 
     fetchTurbidity: function() {
         $.get("http://192.168.1.10:8080/sites/stroubles1/metrics/25/timeseries?limit=1",null,function(object){
-                _notes.push({_id:0,text:"Turbidy: "+object.data[0][0],dateTime:object.data[0][1]});
-                this.trigger(_notes);
+                this.onCreate({_id:0,text:"Turbidy: "+object.data[0][0],dateTime:object.data[0][1]});
         }.bind(this));  
     },
 
