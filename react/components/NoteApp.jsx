@@ -44,7 +44,6 @@ var NoteApp = React.createClass({
                     <NoteListBox onEdit={this.onEdit} onAdd={this.onAdd}/>
                     <NoteCreationBox id={this.state.currentlyEdited} />
                 </div> 
-                    <Login handleLogin={this.handleLogin}/>
             </div>
         )
     }

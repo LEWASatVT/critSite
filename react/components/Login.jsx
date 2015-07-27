@@ -6,7 +6,7 @@ var React = require('react');
 
 var Login = React.createClass({
     getInitialState: function() {
-        return({email:none,password:none});        
+        return({email:null,password:null});        
     },                    
     handleLogin: function() {
         //var email = React.findDOMNode(this.refs.email);
@@ -21,7 +21,7 @@ var Login = React.createClass({
             <input type="email" ref="email"/>
             <input type="password" ref="password"/>
             </div>
-            <input type="button" onClick={this.login.bind(this)}/>
+            <input type="button" onClick={this.handleLogin.bind(this)}/>
             </form>
         );
     }
