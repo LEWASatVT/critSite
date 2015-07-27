@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 require('node-jsx').install({extension: '.jsx'});
 var React=require('react');
 var App=require('./react/App.jsx');
+var Login=require('./react/Login.jsx')
 
 var app = express();
 
@@ -30,6 +31,10 @@ app.get('/',function(req,res){
     res.send('<!DOCTYPE html>'+markup);
 });
 
+app.get('/login',function(req,res){
+    var markup=React.renderComponentToString(Login());
+    res.send('<!DOCTYPE html>'+markup);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

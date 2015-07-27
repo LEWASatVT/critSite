@@ -18,10 +18,10 @@ var Login = React.createClass({
         return (
             <form role="form" id="login-form">
             <div className="formGroup">
-            <input type="email" ref="email"/>
-            <input type="password" ref="password"/>
+            <label>Email: </label><input type="email" ref="email"/>
+            <label>Password: </label><input type="password" ref="password"/>
             </div>
-            <input type="button" onClick={this.handleLogin.bind(this)}/>
+            <input type="button" value="login" onClick={this.handleLogin.bind(this)}/>
             </form>
         );
     }
