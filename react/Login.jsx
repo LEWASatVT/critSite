@@ -25,7 +25,7 @@ var App = React.createClass({
                 </head>
                 <body>
                     <Login />
-                    <script type="text/javascript" src="/js/browserify/bundle.js"></script>
+                    <script type="text/javascript" src="js/browserify/bundle.js"></script>
                     <script src="js/bootstrap.js"></script>
                 </body>
             </html>
