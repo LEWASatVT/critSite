@@ -12,7 +12,7 @@ var Login = React.createClass({
         //var email = React.findDOMNode(this.refs.email);
         //var password = React.findDOMNode(this.refs.password);
 
-        Auth.login(this.state.email, this.state.password)
+        Auth.login(this.state.email, this.state.password);
     },
     render: function() {
         return (

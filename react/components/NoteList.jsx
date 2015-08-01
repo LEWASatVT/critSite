@@ -8,7 +8,7 @@ var Note = require('./Note.jsx');
 var NoteList = React.createClass({
 
     getInitialState:function(){
-        return {activeNoteId:null}
+        return {activeNoteId:null};
     },
 
     setActiveNote: function(id) {
@@ -27,7 +27,7 @@ var NoteList = React.createClass({
             <div className="list-group">
                 {noteNodes}
             </div>
-         )
+         );
     }
 });
 

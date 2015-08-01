@@ -9,7 +9,7 @@ var NoteStore=require('../../stores/NoteStore');
 var NoteListBox = React.createClass({
 
     getInitialState:function(){
-      return {notes:NoteStore.getNotes()}
+      return {notes:NoteStore.getNotes()};
     },
 
     onChange: function(notes) {
@@ -38,7 +38,7 @@ var NoteListBox = React.createClass({
                 <div className="centered"><a href="" onClick={this.onAdd}>Add New</a></div>
                 <NoteList ref="noteList" notes={this.state.notes} onEdit={this.props.onEdit} />
             </div>
-        )
+        );
     }
 });
 

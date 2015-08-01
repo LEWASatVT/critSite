@@ -12,20 +12,21 @@ var leapi = {
                  fn({token:response.token});
              },
              error: function(jqXHR) {
-                 fn({token:null})
+                 fn({token:null});
              }
-            }),
-	syncNote: function(note,fn) {
-		$.post(apiHost+'/media',note,function(object,status) {
-			console.log('status: '+status)
-			var formData = new FormData();
-			formData.append('file',note.file);
-			var imageContent = apiHost+object.href;
-			$.post(imageContent,formData,function(object,status){
-				fn(object,status);
-			});
-		});
-	}
+            });
+    },
+    syncNote: function(note,fn) {
+	$.post(apiHost+'/media',note,function(object,status) {
+	    console.log('status: '+status);
+	    var formData = new FormData();
+	    formData.append('file',note.file);
+	    var imageContent = apiHost+object.href;
+	    $.post(imageContent,formData,function(object,status){
+		fn(object,status);
+	    });
+	});
+    }
 };
 
 module.exports = leapi;

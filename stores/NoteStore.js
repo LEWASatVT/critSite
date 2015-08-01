@@ -26,12 +26,12 @@ var NoteStore = Reflux.createStore({
         note.sync = false;
         if (note.file) {
             ImageUtil.extractExifData(note.file, function(tags){
-                    note['dateTime']=tags.ModifyDate;
-                    note['lat']=tags.GPSLatitude;
-                    note['lon']=tags.GPSLongitude;
-                    _notes.push(note);
-                    this.trigger(_notes);  
-                }.bind(this));
+                note.dateTime = tags.ModifyDate;
+                note.lat = tags.GPSLatitude;
+                note.lon = tags.GPSLongitude;
+                _notes.push(note);
+                this.trigger(_notes);  
+            }.bind(this));
         } else {
             _notes.push(note);
             this.trigger(_notes);

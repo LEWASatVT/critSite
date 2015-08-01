@@ -8,7 +8,7 @@ var NoteStore=require('../../stores/NoteStore');
 var TextArea = React.createClass({
 
     getInitialState:function(){
-        return {noteText:''}
+        return {noteText:''};
     },
 
     handleChange: function(event) {
@@ -27,12 +27,12 @@ var TextArea = React.createClass({
     },
 
     handleFileChange: function(event) {
-        console.log(event.target.files[0])
+        console.log(event.target.files[0]);
         this.setState({fileName: event.target.files[0]});
         this.setState({timeImageText: event.target.files[0].lastModifiedDate});
         var ImageTime = event.target.files[0].lastModifiedDate;
-        console.log("Time Taken: "+ImageTime)
-        console.log("Time Taken2: "+this.state.timeImageText)
+        console.log("Time Taken: "+ImageTime);
+        console.log("Time Taken2: "+this.state.timeImageText);
 
     },
 
@@ -53,7 +53,7 @@ var TextArea = React.createClass({
                  <input type="file" onChange={this.handleFileChange}/>
                 <input type="button" className="btn btn-success btn-lg" value="Save" onClick={this.handleSave}/>
             </div>
-        )
+        );
     }
 });
 

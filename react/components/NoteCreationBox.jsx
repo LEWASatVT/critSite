@@ -31,7 +31,7 @@ var NoteCreationBox = React.createClass({
             <div className="col-md-8">
                 <TextArea onSave={this.handleSave} id={this.props.id} noteText={note ? note.text : ''} />
             </div>
-        )
+        );
     }
 });
 

@@ -11,7 +11,7 @@ var Login = require('./Login.jsx');
 var NoteApp = React.createClass({
 
     getInitialState:function(){
-        return {id:null,user:null}
+        return {id:null,user:null};
     },
 
     onEdit:function(id){
@@ -27,9 +27,8 @@ var NoteApp = React.createClass({
     },
 
     handleLogin:function(email,password){
-        console.log('email: '+email)
-        console.log('password: '+password)
-
+        console.log('email: '+email);
+        console.log('password: '+password);
     },
 
     render: function() {
@@ -45,7 +44,7 @@ var NoteApp = React.createClass({
                     <NoteCreationBox id={this.state.currentlyEdited} />
                 </div> 
             </div>
-        )
+        );
     }
 });
 

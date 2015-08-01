@@ -30,7 +30,7 @@ var App = React.createClass({
                     <script src="js/bootstrap.js"></script>
                 </body>
             </html>
-        )
+        );
     }
 });
 
