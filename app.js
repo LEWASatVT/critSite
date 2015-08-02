@@ -5,10 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var React=require('react');
-var App=React.createFactory(require('./react/App.jsx'));
-var Login=React.createFactory(require('./react/Login.jsx'));
 
+var Router=require('react-router');
+var React=require('react');
+var Iso=require('iso');
+
+var routes = require('./react/routes.jsx');
+var observations = require('./routes/observations.routes')
 var app = express();
 
 // view engine setup
@@ -23,10 +26,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', observations);
+
 // Render React on Server
-app.get('/',function(req,res){
-    var markup=React.renderToString(App());
-    res.render('index',{content: markup})
+app.use(function(req,res){
+    var iso = new Iso();
+    Router.run(routes, req.url, (Handler) => {
+	var markup=React.renderToString(React.createElement(Handler));
+	iso.add(markup);
+	res.render('index',{content: iso.render()});
+    });
 });
 
 /*

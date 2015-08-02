@@ -10,6 +10,7 @@ var NoteStore = require('../../stores/NoteStore.js');
 var NoteCreationBox = React.createClass({
 
     handleSave:function(noteText,id,fileName){
+	console.log('NoteCreationBox: handleSave');
         if(id){
             NoteActions.editNote({_id:id,text:noteText,file:fileName});
         }
@@ -28,7 +29,7 @@ var NoteCreationBox = React.createClass({
         }
 
         return (
-            <div className="col-md-8">
+            <div className="col-sm-4">
                 <TextArea onSave={this.handleSave} id={this.props.id} noteText={note ? note.text : ''} />
             </div>
         );
