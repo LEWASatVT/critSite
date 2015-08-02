@@ -15,23 +15,27 @@
     "debug": "~2.0.0",
     "exif-parser": "^0.1.9",
     "ejs": "~0.8.5",
+    "exif-parser": "^0.1.9",
     "express": "~4.9.0",
     "express-session": "^1.8.2",
+    "iso": "^4.1.0",
     "jquery": "^2.1.4",
     "morgan": "~1.3.0",
-    "node-jsx": "^0.11.0",
-    "react": "^0.11.2",
+    "react": "^0.13.2",
+    "react-router": "^0.13.3",
     "reflux": "^0.1.13",
-    "serve-favicon": "~2.1.3"
+    "serve-favicon": "~2.1.3",
+    "superagent": "^1.2.0"
   },
   "devDependencies": {
+    "babel": "^5.8.20",
+    "babelify": "^6.1.3",
+    "browserify": "^11.0.1",
     "grunt": "^0.4.5",
     "grunt-browserify": "^3.0.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-nodemon": "^0.3.0",
-    "grunt-react": "^0.9.0",
     "jade": "^1.11.0",
-    "jsdom": "^3.1.2",
-    "react-tools": "^0.11.2"
+    "jsdom": "^3.1.2"
   }
 }

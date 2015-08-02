@@ -21,7 +21,7 @@ var Login = React.createClass({
             <label>Email: </label><input type="email" ref="email"/>
             <label>Password: </label><input type="password" ref="password"/>
             </div>
-            <input type="button" value="login" onClick={this.handleLogin.bind(this)}/>
+            <input type="button" value="login" onClick={this.handleLogin}/>
             </form>
         );
     }

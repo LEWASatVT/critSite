@@ -9,12 +9,21 @@
  */
 
 var React = require('react');
+var RouteHandler = require('react-router').RouteHandler;
+
 var NoteApp=require('./components/NoteApp.jsx');
 
 var App = React.createClass({
     render: function() {
         return (
-            <NoteApp />
+            <div className="container">
+                <div className="row header">
+                    <div className="page-header">
+                        <h1>React Notes App</h1>
+                    </div>
+                </div>
+	        <RouteHandler />
+            </div>
         );
     }
 });

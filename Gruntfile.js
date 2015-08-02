@@ -11,7 +11,11 @@ module.exports = function(grunt) {
 
         browserify: {
             options: {
-                transform: [ require('grunt-react').browserify ]
+                transform: [ 'babelify' ],
+		
+		browserifyOptions: {
+		    debug: true
+		}
             },
             client: {
                 src: ['react/**/*.jsx'],
@@ -22,7 +26,10 @@ module.exports = function(grunt) {
             dev: {
                 script: 'bin/www',
                 options:{
-                    ext:'js,jsx,html,ejs'
+                    ext:'js,jsx,html,ejs',
+		    nodemonOptions: {
+			debug:true
+		    }
                 }
             }
         }

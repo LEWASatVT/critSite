@@ -6,7 +6,6 @@ var React = require('react');
 var NoteListBox=require('./NoteListBox.jsx');
 var NoteCreationBox=require('./NoteCreationBox.jsx');
 var NoteActions = require('../../actions/NoteActions.js');
-var Login = require('./Login.jsx');
 
 var NoteApp = React.createClass({
 
@@ -33,17 +32,10 @@ var NoteApp = React.createClass({
 
     render: function() {
         return (
-            <div className="container">
-                <div className="row header">
-                    <div className="page-header">
-                        <h1>React Notes App</h1>
-                    </div>
-                </div>
-                <div className="row">
-                    <NoteListBox onEdit={this.onEdit} onAdd={this.onAdd}/>
-                    <NoteCreationBox id={this.state.currentlyEdited} />
-                </div> 
-            </div>
+	    <div className="row">
+                <NoteListBox onEdit={this.onEdit} onAdd={this.onAdd}/>
+                <NoteCreationBox id={this.state.currentlyEdited} />
+	    </div>
         );
     }
 });

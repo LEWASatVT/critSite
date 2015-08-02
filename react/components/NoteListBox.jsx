@@ -34,7 +34,7 @@ var NoteListBox = React.createClass({
 
     render: function() {
         return (
-            <div className="col-md-4">
+            <div className="col-sm-8">
                 <div className="centered"><a href="" onClick={this.onAdd}>Add New</a></div>
                 <NoteList ref="noteList" notes={this.state.notes} onEdit={this.props.onEdit} />
             </div>

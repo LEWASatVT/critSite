@@ -59,6 +59,7 @@ var NoteStore = Reflux.createStore({
     },
 
     fetchTurbidity: function() {
+	console.log('NoteStore: fetchTurbidity');
         $.get("http://192.168.1.10:8080/sites/stroubles1/metrics/25/timeseries?limit=1",null,function(object){
                 this.onCreate({_id:0,text:"Turbidy: "+object.data[0][0],dateTime:object.data[0][1]});
         }.bind(this));  

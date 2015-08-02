@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 var debug = require('debug')('DevMag');
+require('babel/register')({experimental: true})
 var app = require('../app');
 
 app.set('port', process.env.PORT || 8000);
