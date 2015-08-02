@@ -6,7 +6,6 @@ var React = require('react');
 var NoteListBox=require('./NoteListBox.jsx');
 var NoteCreationBox=require('./NoteCreationBox.jsx');
 var NoteActions = require('../../actions/NoteActions.js');
-var Login = require('./Login.jsx');
 
 var NoteApp = React.createClass({
 

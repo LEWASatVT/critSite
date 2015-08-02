@@ -5,8 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-//For requiring `.jsx` files as Node modules
-require('node-jsx').install({extension: '.jsx'});
 var React=require('react');
 var App=React.createFactory(require('./react/App.jsx'));
 var Login=React.createFactory(require('./react/Login.jsx'));
@@ -27,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Render React on Server
 app.get('/',function(req,res){
-    var markup=React.renderComponentToString(App());
+    var markup=React.renderToString(App());
     res.render('index',{content: markup})
 });
 
