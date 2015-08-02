@@ -1,10 +1,11 @@
 var $ = require('jquery');
-var apiHost = 'http://128.173.40.161:8000';
+var config = require('../config.js');
+
 var leapi = {
     auth: function(email, password, fn) {
         $.ajax(
             {type: 'POST',
-             url: apiHost+'/token',
+             url: config.baseUrl+'/token',
              beforeSend: function(xhr) {
                  xhr.setRequestHeader('Authorization', 'Basic ' + bota(email + ':' + password));
              },
