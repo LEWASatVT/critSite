@@ -8,8 +8,8 @@ var bodyParser = require('body-parser');
 //For requiring `.jsx` files as Node modules
 require('node-jsx').install({extension: '.jsx'});
 var React=require('react');
-var App=require('./react/App.jsx');
-var Login=require('./react/Login.jsx')
+var App=React.createFactory(require('./react/App.jsx'));
+var Login=React.createFactory(require('./react/Login.jsx'));
 
 var app = express();
 
@@ -27,14 +27,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Render React on Server
 app.get('/',function(req,res){
-    var markup=React.renderComponentToString(App());
+    var markup=React.renderToString(App());
     res.send('<!DOCTYPE html>'+markup);
 });
 
+/*
 app.get('/login',function(req,res){
-    var markup=React.renderComponentToString(Login());
+    var markup=React.renderToString(Login());
     res.send('<!DOCTYPE html>'+markup);
-});
+});*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
