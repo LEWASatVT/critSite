@@ -19,7 +19,7 @@ var App = React.createClass({
             <div className="container">
                 <div className="row header">
                     <div className="page-header">
-                        <h1>React Notes App</h1>
+                        <h1>Critical Site Explorer</h1>
                     </div>
                 </div>
 	        <RouteHandler />
