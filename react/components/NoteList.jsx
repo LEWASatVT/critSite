@@ -20,7 +20,7 @@ var NoteList = React.createClass({
             notes=this.props.notes.concat().reverse();
         var noteNodes = notes.map(function (note) {
             return (
-                <Note key={note._id} active={self.state.activeNoteId === note._id} note={note} onEdit={self.props.onEdit} onSelect={self.setActiveNote}/>
+                <Note key={note.id} active={self.state.activeNoteId === note.id} note={note} onEdit={self.props.onEdit} onSelect={self.setActiveNote}/>
             );
         });
         return (

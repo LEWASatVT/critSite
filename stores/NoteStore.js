@@ -1,82 +1,81 @@
 /**
  * Created by Sandeep on 06/10/14.
  */
-var Reflux=require('reflux');
+
+var alt = require('../react/alt');
 var NoteActions=require('../actions/NoteActions');
 var $ = require('jquery');
 var ImageUtil = require('../util/util.js');
 
-var _notes=[];
+class NoteStore {
+    constructor(){
+	var self = this;
+	this.bindListeners({
+	    onCreate: NoteActions.CREATE_NOTE,
+	    onEdit: NoteActions.EDIT_NOTE,
+	    onDelete: NoteActions.DELETE_NOTE,
+	    fetchObservations: NoteActions.FETCH_OBSERVATIONS,
+	    updateObservations: NoteActions.UPDATE_OBSERVATIONS
+	});
+	this.on('init', function() {
+	    self.notes = [];
+	});
+    }
 
-var NoteStore = Reflux.createStore({
-
-    init: function() {
-        this.listenTo(NoteActions.createNote, this.onCreate);
-        this.listenTo(NoteActions.editNote, this.onEdit);
-        this.listenTo(NoteActions.deleteNote, this.onDelete);
-        this.listenTo(NoteActions.fetchTurbidity, this.fetchTurbidity);
-
-    },
-
-    getInitialState: function() {
-        return _notes;
-    },
-
-    onCreate: function(note) {
+    onCreate(note) {
         note.sync = false;
         if (note.file) {
             ImageUtil.extractExifData(note.file, function(tags){
-                note.dateTime = tags.ModifyDate;
-                note.lat = tags.GPSLatitude;
-                note.lon = tags.GPSLongitude;
-                _notes.push(note);
-                this.trigger(_notes);  
+                note.datetime = tags.ModifyDate;
+                note.location = { geo:
+				  {
+				      coordinates: [ tags.GPSLatitude, tags.GPSLongitude ]
+				  }
+				};
+                this.notes.push(note);
             }.bind(this));
         } else {
-            _notes.push(note);
-            this.trigger(_notes);
+            this.notes.push(note);
         }
-    },
+    }
 
-    onEdit: function(note) {
+    onEdit(note) {
         for(var i=0;i<_notes.length;i++){
-            if(_notes[i]._id===note._id){
-                _notes[i].text=note.text;
-                this.trigger(_notes);
+            if(self.notes[i]._id===note._id){
+                this.notes[i].text=note.text;
                 break;
-            }
-        }
-    },
-
-    onDelete: function(note) {
-        for(var i=0;i<_notes.length;i++){
-            if(_notes[i]._id===note._id){
-                _notes.splice(i,1);
-                this.trigger(_notes);
-                break;
-            }
-        }
-    },
-
-    fetchTurbidity: function() {
-	console.log('NoteStore: fetchTurbidity');
-        $.get("http://192.168.1.10:8080/sites/stroubles1/metrics/25/timeseries?limit=1",null,function(object){
-                this.onCreate({_id:0,text:"Turbidy: "+object.data[0][0],dateTime:object.data[0][1]});
-        }.bind(this));  
-    },
-
-    getNotes:function(){
-        return _notes;
-    },
-
-    getNote:function(id){
-        for(var i=0;i<_notes.length;i++){
-            if(_notes[i]._id===id){
-                return _notes[i];
             }
         }
     }
 
-});
+    onDelete(note) {
+        for(var i=0;i<_notes.length;i++){
+            if(_notes[i]._id===note._id){
+                this.notes.splice(i,1);
+                break;
+            }
+        }
+    }
 
-module.exports=NoteStore;
+    fetchObservations() {
+	this.notes = [];
+    }
+
+    updateObservations(observations) {
+	this.notes = observations;
+    }
+    
+    getNotes(){
+        return this.notes;
+    }
+
+    getNote(id) {
+        for(var i=0;i<_notes.length;i++){
+            if(this.notes[i]._id===id){
+                return _notes[i];
+            }
+        }
+    }
+}
+
+module.exports= alt.createStore(NoteStore, 'NoteStore');

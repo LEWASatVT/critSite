@@ -4,26 +4,25 @@
 
 var React = require('react');
 var NoteList = require('./NoteList.jsx');
+var AltContainer = require('alt/AltContainer');
 var NoteStore=require('../../stores/NoteStore');
 
 var NoteListBox = React.createClass({
 
     getInitialState:function(){
-      return {notes:NoteStore.getNotes()};
+      return NoteStore.getState();
     },
 
     onChange: function(notes) {
-        this.setState({
-            notes: notes
-        });
+        this.setState(notes);
     },
  
     componentDidMount: function() {
-        this.unsubscribe = NoteStore.listen(this.onChange);
+        NoteStore.listen(this.onChange);
     },
 
     componentWillUnmount: function() {
-        this.unsubscribe();
+        NoteStore.unlisten(this.onChange);
     },
 
     onAdd:function(event){
@@ -34,10 +33,12 @@ var NoteListBox = React.createClass({
 
     render: function() {
         return (
+	    <AltContainer store={NoteStore}>
             <div className="col-sm-8">
                 <div className="centered"><a href="" onClick={this.onAdd}>Add New</a></div>
                 <NoteList ref="noteList" notes={this.state.notes} onEdit={this.props.onEdit} />
             </div>
+	    </AltContainer>
         );
     }
 });

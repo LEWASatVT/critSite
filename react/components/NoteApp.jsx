@@ -22,7 +22,6 @@ var NoteApp = React.createClass({
     },
 
     componentDidMount:function(){
-        NoteActions.fetchTurbidity();
     },
 
     handleLogin:function(email,password){

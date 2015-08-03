@@ -12,6 +12,7 @@ var Iso=require('iso');
 
 var routes = require('./react/routes.jsx');
 var observations = require('./routes/observations.routes')
+var alt = require('./react/alt')
 var app = express();
 
 // view engine setup
@@ -30,10 +31,15 @@ app.use('/', observations);
 
 // Render React on Server
 app.use(function(req,res){
+
+    console.log('res.locals.data:');
+    console.log(res.locals.data)
+    alt.bootstrap(JSON.stringify(res.locals.data || {}));
+    
     var iso = new Iso();
     Router.run(routes, req.url, (Handler) => {
 	var markup=React.renderToString(React.createElement(Handler));
-	iso.add(markup);
+	iso.add(markup, alt.flush());
 	res.render('index',{content: iso.render()});
     });
 });

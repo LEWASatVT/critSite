@@ -4,8 +4,8 @@ var request = require('superagent'),
 exports.showNearbyObservations = function(req,res,next) {
     request.get(config.baseUrl+'/media',function(err,response) {
 	res.locals.data = {
-	    "ObservationStore": {
-		"media" : response.body
+	    "NoteStore": {
+		"notes" : response.body
 	    }
 	};
 	next();

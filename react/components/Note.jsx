@@ -1,9 +1,11 @@
 /**
  * @jsx React.DOM
  */
-var React = require('react');
-var NoteActions = require('../../actions/NoteActions.js');
-var TextArea=require('./TextArea.jsx');
+var React = require('react'),
+    config = require('../../config'),
+    NoteActions = require('../../actions/NoteActions.js'),
+    TextArea=require('./TextArea.jsx'),
+    Observation=require('./Observation.jsx');
 
 var Note = React.createClass({
 
@@ -38,22 +40,34 @@ var Note = React.createClass({
     },
 
     render: function() {
-
         var note=this.props.note;
-        console.log('Date Data: '+note.dateTime);
-
-        var title=note.text.length >= 20 ? note.text.substring(0,20) : note.text;
-
+	var title='';
+	if (note.text) {
+	    title=note.text.length >= 20 ? note.text.substring(0,20) : note.text;
+	}
+	var image_src = config.baseUrl + note.href;
         var className = this.props.active ? 'active' : null;
+	var observations = note._embedded ? note._embedded.observations ? note._embedded.observations : [] : [];
+	var observationNodes = observations.map(function(observation) {
+	    return (
+		<Observation key={observation.id} value={observation.value} metric={observation._embedded.metric} units={observation._embedded.units} />
+	    );
+	});
 
-        return (
+	var lat = note.location ? note.location.geo.coordinates[0] : null;
+	var lon = note.location ? note.location.geo.coordinates[1] : null;
+	
+	return (
             <div  className={'list-group-item '+className}>
             <a href="#" onClick={this.handleEdit.bind(null,note._id)}>{title}</a>
-            <img src="#" id={"thumbnail_"+note._id}/>
-            <span className='timestamp'>{note.dateTime}</span>
-            <span className='latitude'>{note.lat}</span>
-            <span className='longitude'>{note.lon}</span>
+            <img src={image_src} id={"thumbnail_"+note._id}/>
+            <span className='timestamp'>{note.datetime}</span>
+            <span className='latitude'>{lat}</span>,
+            <span className='longitude'>{lon}</span>
             <a href="#" onClick={this.handleDelete.bind(null,note._id)}>       X</a>
+	    <div className="list-observations">
+	         {observationNodes}
+	    </div>
             </div>
         );
     }

@@ -13,12 +13,14 @@ var Iso = require('iso');
 var Router = require('react-router');
 var React = require('react/addons');
 
+var alt = require('./alt');
 var routes = require('./routes.jsx');
 
 if (typeof window !== 'undefined') {
     window.onload = function() {
         /*React.render(App(), document); */
 	Iso.bootstrap(function(state, meta, container) {
+	    alt.bootstrap(state);
 	    Router.run(routes, Router.HistoryLocation, (Handler) => {
 		var node = React.createElement(Handler);
 		React.render(node, container);
