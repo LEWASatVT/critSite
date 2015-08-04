@@ -3,7 +3,8 @@
  */
 
 var React = require('react');
-var Note = require('./Note.jsx');
+var Note = require('./Note.jsx'); 
+var hashCode = require('../../util/util').hashCode;
 
 var NoteList = React.createClass({
 
@@ -19,6 +20,7 @@ var NoteList = React.createClass({
         var self=this,
             notes=this.props.notes.concat().reverse();
         var noteNodes = notes.map(function (note) {
+	    var key = hashCode('Note' + note.id);
             return (
                 <Note key={note.id} active={self.state.activeNoteId === note.id} note={note} onEdit={self.props.onEdit} onSelect={self.setActiveNote}/>
             );
