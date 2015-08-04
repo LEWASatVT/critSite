@@ -4,7 +4,6 @@
 
 var alt = require('../react/alt');
 var NoteActions=require('../actions/NoteActions');
-var $ = require('jquery');
 var ImageUtil = require('../util/util.js');
 
 class NoteStore {
@@ -20,28 +19,16 @@ class NoteStore {
 	this.on('init', function() {
 	    self.notes = [];
 	});
-    }
+   }
 
     onCreate(note) {
         note.sync = false;
-        if (note.file) {
-            ImageUtil.extractExifData(note.file, function(tags){
-                note.datetime = tags.ModifyDate;
-                note.location = { geo:
-				  {
-				      coordinates: [ tags.GPSLatitude, tags.GPSLongitude ]
-				  }
-				};
-                this.notes.push(note);
-            }.bind(this));
-        } else {
-            this.notes.push(note);
-        }
+        this.notes.push(note);
     }
 
     onEdit(note) {
         for(var i=0;i<_notes.length;i++){
-            if(self.notes[i]._id===note._id){
+            if(self.notes[i].id===note.id){
                 this.notes[i].text=note.text;
                 break;
             }
@@ -50,7 +37,7 @@ class NoteStore {
 
     onDelete(note) {
         for(var i=0;i<_notes.length;i++){
-            if(_notes[i]._id===note._id){
+            if(this.notes[i].id===note.id){
                 this.notes.splice(i,1);
                 break;
             }
@@ -72,7 +59,7 @@ class NoteStore {
     getNote(id) {
         for(var i=0;i<_notes.length;i++){
             if(this.notes[i]._id===id){
-                return _notes[i];
+                return this.notes[i];
             }
         }
     }
