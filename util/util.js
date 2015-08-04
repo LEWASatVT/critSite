@@ -10,4 +10,19 @@ var imageUtil = {
     	reader.readAsArrayBuffer(file);
     }
 };
-module.exports = imageUtil; 
+
+var hash = {
+    hashCode: function(string){
+	var hash = 0;
+	if (string.length == 0) return hash;
+	for (var i = 0; i < string.length; i++) {
+ 		var char = string.charCodeAt(i);
+ 		hash = ((hash<<5)-hash)+char;
+ 		hash = hash & hash; // Convert to 32bit integer
+ 	}
+ 	return hash;
+    }
+};
+
+exports.imageUtil = imageUtil; 
+exports.hashCode = hash.hashCode;

@@ -1,6 +1,8 @@
 /**
  * @jsx React.DOM
  */
+
+var hashCode = require('../../util/util').hashCode;
 var React = require('react'),
     config = require('../../config'),
     NoteActions = require('../../actions/NoteActions.js'),
@@ -32,7 +34,6 @@ var Note = React.createClass({
             console.log("fileName: "+this.props.note.file);
             var reader = new FileReader();
             reader.onload = function(e) {
-                console.log("Result Data: "+e.target.result);
                 noteImageEl.setAttribute('src',e.target.result);
             };
             reader.readAsDataURL(this.props.note.file);
@@ -49,8 +50,9 @@ var Note = React.createClass({
         var className = this.props.active ? 'active' : null;
 	var observations = note._embedded ? note._embedded.observations ? note._embedded.observations : [] : [];
 	var observationNodes = observations.map(function(observation) {
+	    var key = hashCode('Observation' + observation.id);
 	    return (
-		<Observation key={observation.id} value={observation.value} metric={observation._embedded.metric} units={observation._embedded.units} />
+		<Observation key={key} value={observation.value} metric={observation._embedded.metric} units={observation._embedded.units} />
 	    );
 	});
 
